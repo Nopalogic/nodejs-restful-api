@@ -1,8 +1,6 @@
-# API Documentation
+# User API Spesification
 
-## User API Spesification
-
-### Register User API
+## Register User API
 
 Endpoint : POST /api/users/register
 
@@ -35,7 +33,7 @@ Request Body Error :
 }
 ```
 
-### Login User API
+## Login User API
 
 Endpoint : POST /api/users/login
 
@@ -66,7 +64,7 @@ Response Body Error :
 }
 ```
 
-### Update User API
+## Update User API
 
 Enpoint : PATCH /api/users/id
 
@@ -102,7 +100,7 @@ Response Body Error :
 }
 ```
 
-### Get User API
+## Get User API
 
 Endpoint : GET /api/users/id
 
@@ -129,7 +127,7 @@ Response Body Error :
 }
 ```
 
-### Logout User API
+## Logout User API
 
 Endpoint : DELETE /api/users/logout
 
