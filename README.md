@@ -66,7 +66,7 @@ Response Body Error :
 
 ## Update User API
 
-Enpoint : PATCH /api/users/id
+Enpoint : PATCH /api/users/:id
 
 Headers :
 
@@ -148,5 +148,195 @@ Response Body Error :
 ```json
 {
 	"errors": "Unauthorized"
+}
+```
+
+# Contact API Specificaion
+
+## Create Contact
+
+Endpoint : POST /api/contacts
+
+Headers :
+
+- Authorization : token
+
+Request Body :
+
+```json
+{
+	"firstName": "Naufal",
+	"lastName": "Adhi",
+	"email": "naufal@example.com",
+	"phone": "12345678"
+}
+```
+
+Response Body Success :
+
+```json
+{
+	"data": {
+		"id": 1,
+		"firstName": "Naufal",
+		"lastName": "Adhi",
+		"email": "naufal@example.com",
+		"phone": "12345678"
+	}
+}
+```
+
+Response Body Error :
+
+```json
+{
+	"errors": "Email is not valid format"
+}
+```
+
+## Update Contact API
+
+Endpoint : PUT /api/contacts/:id
+
+Headers :
+
+- Authorization : token
+
+Request Body :
+
+```json
+{
+	"firstName": "Naufal",
+	"lastName": "Adhi",
+	"email": "naufal@example.com",
+	"phone": "12345678"
+}
+```
+
+Response Body Success :
+
+```json
+{
+	"data": {
+		"id": 1,
+		"firstName": "Naufal",
+		"lastName": "Adhi",
+		"email": "naufal@example.com",
+		"phone": "12345678"
+	}
+}
+```
+
+Response Body Error :
+
+```json
+{
+	"errors": "Email is not valid format"
+}
+```
+
+## Get Contact API
+
+Endpoint : GET /api/contacts/:id
+
+Headers :
+
+- Authorization : token
+
+Response Body Success :
+
+```json
+{
+	"data": {
+		"id": 1,
+		"firstName": "Naufal",
+		"lastName": "Adhi",
+		"email": "naufal@example.com",
+		"phone": "12345678"
+	}
+}
+```
+
+Response Body Error :
+
+```json
+{
+	"errors": "Contact not found"
+}
+```
+
+## Search Contact API
+
+Endpoint : GET /api/contacts
+
+Headers :
+
+- Authorization : token
+
+Query params :
+
+- name : Search by firstName or lastName, using like, optional
+- email : Search by email, using like, optional
+- phone : Search by phone, using like, optional
+- page : Number of page, default 1
+- size : size per page, default 10
+
+Response Body Success :
+
+```json
+{
+	"data": [
+		{
+			"id": 1,
+			"firstName": "Naufal",
+			"lastName": "Adhi",
+			"email": "naufal@example.com",
+			"phone": "12345678"
+		},
+		{
+			"id": 2,
+			"firstName": "Adhi",
+			"lastName": "Ramadhan",
+			"email": "adhi@example.com",
+			"phone": "12345678"
+		}
+	],
+	"paging": {
+		"page": 1,
+		"totalPage": 4,
+		"totalItem": 20
+	}
+}
+```
+
+Response Body Error :
+
+```json
+{
+	"errors": "Contact not found"
+}
+```
+
+## Remove Contact API
+
+Endpoint : DELETE /api/contacts
+
+Headers :
+
+- Authorization : token
+
+Response Body Success :
+
+```json
+{
+	"data": "Ok"
+}
+```
+
+Response Body Error :
+
+```json
+{
+	"errors": "Contact not found"
 }
 ```
