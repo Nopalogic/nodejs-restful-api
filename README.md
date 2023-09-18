@@ -340,3 +340,187 @@ Response Body Error :
 	"errors": "Contact not found"
 }
 ```
+
+# Address API Specification
+
+## Create Address
+
+Endpoint : POST /api/contacts/:contactId/addresses
+
+Headers :
+
+- Authorization : token
+
+Request Body :
+
+```json
+{
+	"street": "Nama jalan",
+	"city": "Nama kota",
+	"province": "Nama Provinsi",
+	"country": "Nama negara",
+	"postalCode": 12345
+}
+```
+
+Response Body Success :
+
+```json
+{
+	"data": {
+		"id": 1,
+		"street": "Nama jalan",
+		"city": "Nama kota",
+		"province": "Nama Provinsi",
+		"country": "Nama negara",
+		"postalCode": 12345
+	}
+}
+```
+
+Response Body Error :
+
+```json
+{
+	"errors": "Country is required"
+}
+```
+
+## Update Address
+
+Endpoint : PUT /api/contacts/:contactId/addresses/:addressId
+
+Headers :
+
+- Authorization : token
+
+Request Body :
+
+```json
+{
+	"street": "Nama jalan",
+	"city": "Nama kota",
+	"province": "Nama Provinsi",
+	"country": "Nama negara",
+	"postalCode": 12345
+}
+```
+
+Response Body Success :
+
+```json
+{
+	"data": {
+		"id": 1,
+		"street": "Nama jalan",
+		"city": "Nama kota",
+		"province": "Nama Provinsi",
+		"country": "Nama negara",
+		"postalCode": 12345
+	}
+}
+```
+
+Response Body Error :
+
+```json
+{
+	"errors": "Country is required"
+}
+```
+
+## Get Address
+
+Endpoint : GET /api/contacts/:contactId/addresses/:addressId
+
+Headers :
+
+- Authorization : token
+
+Response Body Success :
+
+```json
+{
+	"data": {
+		"id": 1,
+		"street": "Nama jalan",
+		"city": "Nama kota",
+		"province": "Nama Provinsi",
+		"country": "Nama negara",
+		"postalCode": 12345
+	}
+}
+```
+
+Response Body Error :
+
+```json
+{
+	"errors": "Contact not found"
+}
+```
+
+## List Address
+
+Endpoint : GET /api/contacts/:contactId/addresses
+
+Headers :
+
+- Authorization : token
+
+Response Body Success :
+
+```json
+{
+	"data": [
+		{
+			"id": 1,
+			"street": "Nama jalan",
+			"city": "Nama kota",
+			"province": "Nama Provinsi",
+			"country": "Nama negara",
+			"postalCode": 12345
+		},
+		{
+			"id": 2,
+			"street": "Nama jalan",
+			"city": "Nama kota",
+			"province": "Nama Provinsi",
+			"country": "Nama negara",
+			"postalCode": 12345
+		}
+	]
+}
+```
+
+Response Body Error :
+
+```json
+{
+	"errors": "Contact not found"
+}
+```
+
+## Remove Address
+
+Endpoint : DELETE /api/contacts/:contactId/addresses/:addressId
+
+Headers :
+
+- Authorization : token
+
+Response Body Success :
+
+```json
+{
+	"data": "Ok"
+}
+```
+
+Response Body Error :
+
+```json
+{
+	"errors": "Address not found"
+}
+```
