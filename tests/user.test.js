@@ -1,7 +1,8 @@
 import supertest from 'supertest';
+import bcrypt from 'bcrypt';
 import { logger } from '../src/app/logging.js';
 import { server } from '../src/app/server.js';
-import { createTestUser, removeTestUser } from './test-util.js';
+import { createTestUser, getTestUser, removeTestUser } from './test-util.js';
 
 describe('POST /api/users', () => {
 	afterEach(async () => {
@@ -135,5 +136,58 @@ describe('GET /api/users/:id', () => {
 
 		expect(result.status).toBe(401);
 		expect(result.body.errors).toBeDefined();
+	});
+});
+
+describe('PATCH /api/users/:id', () => {
+	beforeEach(async () => {
+		await createTestUser();
+	});
+
+	afterEach(async () => {
+		await removeTestUser();
+	});
+
+	it('should can update user', async () => {
+		const result = await supertest(server).patch('/api/users/:id').set('Authorization', 'test').send({
+			name: 'Naufal',
+			password: 'test1234',
+		});
+
+		expect(result.status).toBe(200);
+		expect(result.body.data.username).toBe('test');
+		expect(result.body.data.name).toBe('Naufal');
+
+		const user = await getTestUser();
+		expect(await bcrypt.compare('test1234', user.password)).toBe(true);
+	});
+
+	it('should can update user name', async () => {
+		const result = await supertest(server).patch('/api/users/:id').set('Authorization', 'test').send({
+			name: 'Naufal',
+		});
+
+		expect(result.status).toBe(200);
+		expect(result.body.data.username).toBe('test');
+		expect(result.body.data.name).toBe('Naufal');
+	});
+
+	it('should can update user password', async () => {
+		const result = await supertest(server).patch('/api/users/:id').set('Authorization', 'test').send({
+			password: 'test1234',
+		});
+
+		expect(result.status).toBe(200);
+		expect(result.body.data.username).toBe('test');
+		expect(result.body.data.name).toBe('test');
+
+		const user = await getTestUser();
+		expect(await bcrypt.compare('test1234', user.password)).toBe(true);
+	});
+
+	it('should reject if request is not valid', async () => {
+		const result = await supertest(server).patch('/api/users/:id').set('Authorization', 'tst').send({});
+
+		expect(result.status).toBe(401);
 	});
 });
