@@ -112,3 +112,28 @@ describe('POST /api/users/login', () => {
 		expect(result.body.errors).toBeDefined();
 	});
 });
+
+describe('GET /api/users/:id', () => {
+	beforeEach(async () => {
+		await createTestUser();
+	});
+
+	afterEach(async () => {
+		await removeTestUser();
+	});
+
+	it('should can get current user', async () => {
+		const result = await supertest(server).get('/api/users/:id').set('Authorization', 'test');
+
+		expect(result.status).toBe(200);
+		expect(result.body.data.username).toBe('test');
+		expect(result.body.data.name).toBe('test');
+	});
+
+	it('should reject if token invalid', async () => {
+		const result = await supertest(server).get('/api/users/:id').set('Authorization', 'tst');
+
+		expect(result.status).toBe(401);
+		expect(result.body.errors).toBeDefined();
+	});
+});
